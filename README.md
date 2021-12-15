@@ -25,7 +25,7 @@ php artisan vendor:publish --tag="laravel-log-visits_without_prefix-migrations"
 php artisan migrate
 ```
 
-You can publish the config file with:
+You can publish the config file (optional) with:
 ```bash
 php artisan vendor:publish --tag="laravel-log-visits_without_prefix-config"
 ```
@@ -151,8 +151,8 @@ $ip = LogVisits::getIp();
 ```
 
 A middleware is provided for convenience in your routes:
-```php
 
+```php
 // This will automatically log visits for this route
 Route::get('/', function () {
     return view('welcome');
@@ -160,11 +160,13 @@ Route::get('/', function () {
 ```
 
 You can also update the browscap.ini cache from the most recent file with this artisan command:
+
 ```bash
 php artisan log-visits:update-browscap
 ```
 
 You can make sure that you get a fresh version every week by adding this to your App\Console\Kernel.php file:
+
 ```php
 
 namespace App\Console;
