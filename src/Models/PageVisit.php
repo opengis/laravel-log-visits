@@ -13,6 +13,6 @@ class PageVisit extends Model
 
     public function getTable()
     {
-        return config('log-visits.table_name', 'page_visits_log');
+        return config('log-visits.table-name', 'page_visits_log');
     }
 }

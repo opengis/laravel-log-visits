@@ -78,8 +78,8 @@ class LogVisits
         $user = auth()->user();
         $date = now();
 
-        if (config('log-visits.queue_mode') == 'queue') {
-            LogPageVisitJob::dispatch($serverVars, $ip, $user, $date, $user_agent)->onQueue(config('log-visits.default_queue', 'default'));
+        if (config('log-visits.queue-mode') == 'queue') {
+            LogPageVisitJob::dispatch($serverVars, $ip, $user, $date, $user_agent)->onQueue(config('log-visits.default-queue', 'default'));
 
             return true;
         }

@@ -41,7 +41,7 @@ return [
     | Configure the entries table name used by the package
     |
     */
-    'table_name' => env('VISIT_TABLE_NAME', 'page_visits_log'),
+    'table-name' => env('VISIT_TABLE_NAME', 'page_visits_log'),
 
     /*
     |

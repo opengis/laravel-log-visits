@@ -6,7 +6,7 @@ return [
     | Configure the entries table name used by the package
     |
     */
-    'table_name' => env('VISIT_TABLE_NAME', 'page_visits_log'),
+    'table-name' => env('VISIT_TABLE_NAME', 'page_visits_log'),
 
     /*
     |
@@ -70,6 +70,13 @@ return [
     |
     */
     'ip-metadata-service' => env('VISIT_IP_METADATA_SERVICE', 'none'),
+
+    /*
+    |
+    | Default ip metadata cache strategy (in days)
+    |
+    */
+    'ip-metadata-cache-days' => env('VISIT_IP_METADATA_CACHE_DAYS', 30),
 
     /*
     |

@@ -9,9 +9,9 @@ return new class extends Migration
 {
     public function up()
     {
-        $json_column = DB::getDriverName() ? 'jsonb' : 'json';
+        $json_column = DB::getDriverName() == 'pgsql' ? 'jsonb' : 'json';
 
-        Schema::create(config('log-visits.table_name'), function (Blueprint $table) use($json_column) {
+        Schema::create(config('log-visits.table-name'), function (Blueprint $table) use($json_column) {
             $table->id();
             $table->string('full_url');
             $table->string('ip');

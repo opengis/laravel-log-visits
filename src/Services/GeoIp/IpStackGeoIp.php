@@ -40,7 +40,7 @@ class IpStackGeoIp implements GeoIpInterface
     {
         $url = $this->baseUrl . '&output=json&language=en&fields=country_code';
 
-        return Cache::store(config('log-visits.cache-store'))->remember($url, now()->addDay(), function () use ($url) {
+        return Cache::store(config('log-visits.cache-store'))->remember($url, now()->addDay(config('log-visits.ip-metadata-cache-days', 30)), function () use ($url) {
             try {
                 $json = Http::get($url)->json();
                 if (isset($json['country_code'])) {
@@ -67,7 +67,7 @@ class IpStackGeoIp implements GeoIpInterface
 
         $url = $this->baseUrl . '&output=json&language=' . config('log-visits.ip-metadata-language') . '&hostname=1';
 
-        return Cache::store(config('log-visits.cache-store'))->remember($url, now()->addDay(), function () use ($url) {
+        return Cache::store(config('log-visits.cache-store'))->remember($url, now()->addDay(config('log-visits.ip-metadata-cache-days', 30)), function () use ($url) {
             try {
                 $json = Http::get($url)->json();
 
