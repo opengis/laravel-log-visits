@@ -4,7 +4,7 @@
 [![PHP Version Require](http://poser.pugx.org/opengis/laravel-log-visits/require/php)](https://packagist.org/packages/opengis/laravel-log-visits)
 [![Tests](https://github.com/opengis/laravel-log-visits/actions/workflows/run-tests.yml/badge.svg)](https://github.com/opengis/laravel-log-visits/actions/workflows/run-tests.yml)
 [![Check & fix styling](https://github.com/opengis/laravel-log-visits/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/opengis/laravel-log-visits/actions/workflows/php-cs-fixer.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/opengis/laravel-log-visits.svg?style=flat-square)](https://packagist.org/packages/opengis/laravel-log-visits)
+
 
 
 This package allows you to easily log page request with all king of metadata information
