@@ -11,6 +11,13 @@ This package allows you to easily log page request with all king of metadata inf
 - It uses a cached version of browscap.ini (http://browscap.org/) file to get browser metadata
 - It optionnaly uses Ipstack (https://ipstack.com/) to get metadata information on the ip address
 
+It uses the package browscap/browscap-php (https://github.com/browscap/browscap-php) to get the metadata for the browser.
+With this package you don't have to manually download the latest browscap.ini file and reference it in you php.ini [browscap] section.
+Moreover, you get the benefits of the cache which is way faster than the php get_browser native function.
+You can use the artisan command log-visits:update-browscap to create the cache for the first time but if you don't, it will be automatically generated on the first request. Make sure you adjust the config log-visits.browscap-version before you run it.
+
+For now, laravel-log-visits uses browscap/browscap-php version 5.1 which does not support PHP 8.1, version 6.0 does but requires league/flysystem 2.3.2 and laravel 8 requires league/flysystem 1.1. I plan to update the package to support PHP 8.1 on laravel 9 soon.
+
 ## Installation
 
 You can install the package via composer:
@@ -22,15 +29,16 @@ composer require opengis/laravel-log-visits
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-log-visits_without_prefix-migrations"
+php artisan vendor:publish --tag="log-visits-migrations"
 php artisan migrate
 ```
 
 You can publish the config file (optional) with:
 ```bash
-php artisan vendor:publish --tag="laravel-log-visits_without_prefix-config"
+php artisan vendor:publish --tag="log-visits-config"
 ```
 
+The config file uses environment variable for all of it's options so, if you prefer, you can just set the variables in you .env. instead of publishing the file.
 This is the contents of the published config file:
 
 ```php
@@ -148,8 +156,7 @@ $ipMetadata = LogVisits::getIpMetadata();
 $ipMetadata = LogVisits::getIpMetadata('142.250.64.142');
 
 // Resolves the current IP
-// If server variable HTTP_FORWARDED_FOR or header x_real_ip is set,
-// it will be used over REMOTE_ADDR variable
+// If server variable HTTP_FORWARDED_FOR or header x_real_ip is set, it will be used over REMOTE_ADDR variable
 $ip = LogVisits::getIp();
 ```
 
