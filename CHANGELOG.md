@@ -2,7 +2,7 @@
 
 All notable changes to `laravel-log-visits` will be documented in this file.
 
-## 1.0.1 - 2021-12-15
+## 1.0.0 - 2021-12-15
 
 - First stable release
 
