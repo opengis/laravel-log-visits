@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-log-visits` will be documented in this file.
 
+## 0.0.3 - 2021-12-15
+
+**Full Changelog**: https://github.com/opengis/laravel-log-visits/compare/0.0.2...0.0.3
+
 ## 1.0.0 - 202X-XX-XX
 
 - initial release
