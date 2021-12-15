@@ -123,6 +123,8 @@ return [
 
 
 ```php
+use Opengis\LogVisits\LogVisits;
+
 // Logs visits according to the config file options
 LogVisits::logVisit();
 
