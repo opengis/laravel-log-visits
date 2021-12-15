@@ -38,7 +38,7 @@ class LogPageVisitJob implements ShouldQueue
         $this->server_vars = $serverVars;
         $this->ip = $ip;
         $this->user = $user;
-        $this->user_agent = $user_agent;
+        $this->user_agent = $user_agent ? $user_agent : $this->server_vars['server']['HTTP_USER_AGENT'];
         $this->date = $date;
     }
 
