@@ -5,7 +5,7 @@ services:
   postgres:
     image: postgres:latest
     ports:
-      - "127.0.0.1:5433:5432"
+      - "0.0.0.0:5433:5432"
     environment:
       POSTGRES_PASSWORD: 12345
       POSTGRES_USER: postgres
@@ -13,7 +13,7 @@ services:
   mysql:
     image: mysql:latest
     ports:
-      - "127.0.0.1:3306:3306"
+      - "0.0.0.0:3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 12345
       MYSQL_DATABASE: laravel-log-visits
@@ -22,4 +22,4 @@ services:
     sysctls:
       - net.core.somaxconn=511
     ports:
-      - "127.0.0.1:6378:6379"
+      - "0.0.0.0:6378:6379"

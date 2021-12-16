@@ -10,6 +10,15 @@ return [
 
     /*
     |
+    | Use the native PHP get_browser function
+    | The browscap directive of the [browscap] section of your php.ini must be set
+    | Authorized values are: native and cache
+    |
+    */
+    'get-browser-source' => env('VISIT_BROWSER_SOURCE', 'cache'),
+
+    /*
+    |
     | Configure the cache store used by the package
     |
     */

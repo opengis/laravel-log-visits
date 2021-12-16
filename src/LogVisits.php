@@ -9,35 +9,72 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Opengis\LogVisits\Jobs\LogPageVisitJob;
 use Opengis\LogVisits\Services\GeoIp\IpStackGeoIp;
+use Throwable;
 
 class LogVisits
 {
     public static function updateBrowscap()
     {
-        $loader = IniLoaderInterface::PHP_INI;
+        if(config('log-visits.get-browser-source') == 'cache'){
+            $loader = IniLoaderInterface::PHP_INI;
 
-        switch (config('log-visits.browscap-version')) {
-            case 'lite':
-                $loader = IniLoaderInterface::PHP_INI_LITE;
+            switch (config('log-visits.browscap-version')) {
+                case 'lite':
+                    $loader = IniLoaderInterface::PHP_INI_LITE;
 
-                break;
-            case 'full':
-                $loader = IniLoaderInterface::PHP_INI_FULL;
+                    break;
+                case 'full':
+                    $loader = IniLoaderInterface::PHP_INI_FULL;
 
-                break;
-            default:
-                $loader = IniLoaderInterface::PHP_INI;
+                    break;
+                default:
+                    $loader = IniLoaderInterface::PHP_INI;
+            }
+
+            $cache = Cache::store(config('log-visits.cache-store'));
+            $logger = Log::channel(config('log-visits.log-channel'));
+            $bc = new BrowscapUpdater($cache, $logger);
+
+            try{
+                $bc->update($loader);
+
+            } catch(Throwable $th){
+                config(['log-visits.get-browser-source' => 'native']);
+
+            }
         }
-
-        $cache = Cache::store(config('log-visits.cache-store'));
-        $logger = Log::channel(config('log-visits.log-channel'));
-
-        $bc = new BrowscapUpdater($cache, $logger);
-        $bc->update($loader);
     }
 
     public static function getBrowser($user_agent = null)
     {
+        if(config('log-visits.get-browser-source') == 'native') {
+            if(! $user_agent){
+                $user_agent = request()->server('HTTP_USER_AGENT');
+            }
+
+            if($user_agent){
+                return Cache::store(config('log-visits.cache-store'))->remember($user_agent, now()->addDay(config('log-visits.ip-metadata-cache-days', 30)), function () use ($user_agent) {
+                    try{
+                        $metadata = collect(get_browser($user_agent))->toArray();
+                    } catch (Throwable $th){
+                        $metadata = [
+                            'browser' => 'Unknown',
+                            'platform' => 'Unknown',
+                            'user_agent' => $user_agent,
+                        ];
+                    }
+
+                    return $metadata;
+                });
+            }
+
+            return [
+                'browser' => 'Unknown',
+                'platform' => 'Unknown',
+                'user_agent' => $user_agent,
+            ];
+        }
+
         $cache = Cache::store(config('log-visits.cache-store'));
         $logger = Log::channel(config('log-visits.log-channel'));
 
