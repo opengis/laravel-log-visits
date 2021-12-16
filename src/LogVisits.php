@@ -154,7 +154,8 @@ class LogVisits
         return $ip;
     }
 
-    public static function getCountryCode(){
+    public static function getCountryCode()
+    {
         if (config('log-visits.ip-metadata-service') == 'ipstack') {
             $geoIp = new IpStackGeoIp();
 
