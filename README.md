@@ -144,7 +144,8 @@ return [
 ```php
 use Opengis\LogVisits\LogVisits;
 
-// Logs visits according to the config file options
+// Logs to the visits table according to the config file options
+// Result is stored in json (jsonb for pgsql) in three seperate columns in the database
 LogVisits::logVisit();
 
 // Updates the browscap.ini cache from the most recent file
@@ -166,7 +167,7 @@ $ipMetadata = LogVisits::getIpMetadata();
 $ipMetadata = LogVisits::getIpMetadata('142.250.64.142');
 
 // Gets the country short code for the current request ip
-// Usefull for phone number of countries UI default
+// Usefull for phone number or countries list UI default
 // Will return the ip-metadata-default-country-code config if unable to process through ipstack
 $ipMetadata = LogVisits::getCountryCode();
 
