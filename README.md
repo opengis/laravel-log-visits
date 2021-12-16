@@ -1,4 +1,5 @@
-# Log page visits with php browscap information
+# Log every page visits to database in Laravel applications
+# Includes detailed server variables, browser informations and optionally ip geolocation
 
 [![Latest Version on Packagist](https://img.shields.io/github/release/opengis/laravel-log-visits.svg)](https://packagist.org/packages/opengis/laravel-log-visits)
 [![PHP Version Require](http://poser.pugx.org/opengis/laravel-log-visits/require/php)](https://packagist.org/packages/opengis/laravel-log-visits)
