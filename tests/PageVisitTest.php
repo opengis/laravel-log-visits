@@ -23,7 +23,6 @@ it('logs visits to the table', function () {
 
     $this->assertCount(1, PageVisit::get());
     $this->assertContains(PageVisit::first()->platform, ['Win10', 'Unknown']);
-
 });
 
 test('the middleware logs visits', function () {
@@ -45,5 +44,4 @@ it('updates browsecap automatically if cache has been cleared', function () {
 
     $this->assertCount(1, PageVisit::get());
     $this->assertContains(PageVisit::first()->platform, ['Win10', 'Unknown']);
-
 });

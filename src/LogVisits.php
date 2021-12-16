@@ -15,7 +15,7 @@ class LogVisits
 {
     public static function updateBrowscap()
     {
-        if(config('log-visits.get-browser-source') == 'cache'){
+        if (config('log-visits.get-browser-source') == 'cache') {
             $loader = IniLoaderInterface::PHP_INI;
 
             switch (config('log-visits.browscap-version')) {
@@ -35,28 +35,26 @@ class LogVisits
             $logger = Log::channel(config('log-visits.log-channel'));
             $bc = new BrowscapUpdater($cache, $logger);
 
-            try{
+            try {
                 $bc->update($loader);
-
-            } catch(Throwable $th){
+            } catch (Throwable $th) {
                 config(['log-visits.get-browser-source' => 'native']);
-
             }
         }
     }
 
     public static function getBrowser($user_agent = null)
     {
-        if(config('log-visits.get-browser-source') == 'native') {
-            if(! $user_agent){
+        if (config('log-visits.get-browser-source') == 'native') {
+            if (! $user_agent) {
                 $user_agent = request()->server('HTTP_USER_AGENT');
             }
 
-            if($user_agent){
+            if ($user_agent) {
                 return Cache::store(config('log-visits.cache-store'))->remember($user_agent, now()->addDay(config('log-visits.ip-metadata-cache-days', 30)), function () use ($user_agent) {
-                    try{
+                    try {
                         $metadata = collect(get_browser($user_agent))->toArray();
-                    } catch (Throwable $th){
+                    } catch (Throwable $th) {
                         $metadata = [
                             'browser' => 'Unknown',
                             'platform' => 'Unknown',

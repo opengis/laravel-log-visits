@@ -40,13 +40,14 @@ class UpdateBrowscapCommand extends Command
     {
         $this->info('Updating browscap file...');
 
-        if(config('log-visits.get-browser-source') == 'cache'){
+        if (config('log-visits.get-browser-source') == 'cache') {
             LogVisits::updateBrowscap();
         } else {
             $this->info('Extension configured to use native PHP get_browser() function.');
+
             return 0;
         }
-        if(config('log-visits.get-browser-source') == 'cache'){
+        if (config('log-visits.get-browser-source') == 'cache') {
             $this->info('Browscap file up to date and cached.');
         } else {
             $this->info('Could not update, trying to use native PHP get_browser function.');
