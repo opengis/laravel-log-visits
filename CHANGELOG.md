@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-log-visits` will be documented in this file.
 
+## 1.1.0 - 2021-12-16
+
+- Adds getCountryCode() function
+
+**Full Changelog**: https://github.com/opengis/laravel-log-visits/compare/1.0.2...1.1.0
+
 ## 1.0.2 - 2021-12-16
 
 - Adds support for PHP native get_browser() function
