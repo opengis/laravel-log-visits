@@ -17,7 +17,7 @@ it('can fetch ip metadata from ipstack', function () {
     $this->assertTrue(isset(collect(json_decode(PageVisit::first()->ip_metadata))->toArray()['ip']));
     $this->assertEquals('37.19.213.105', collect(json_decode(PageVisit::first()->ip_metadata))->toArray()['ip']);
 
-    if(env('IPSTACK_KEY')){
+    if (env('IPSTACK_KEY')) {
         $this->assertEquals('CA', collect(json_decode(PageVisit::first()->ip_metadata))->toArray()['country_code']);
     }
 });

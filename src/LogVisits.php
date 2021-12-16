@@ -2,15 +2,14 @@
 
 namespace Opengis\LogVisits;
 
-use Throwable;
 use BrowscapPHP\Browscap;
 use BrowscapPHP\BrowscapUpdater;
-use Opengis\LogVisits\LogVisits;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Cache;
 use BrowscapPHP\Helper\IniLoaderInterface;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Opengis\LogVisits\Jobs\LogPageVisitJob;
 use Opengis\LogVisits\Services\GeoIp\IpStackGeoIp;
+use Throwable;
 
 class LogVisits
 {
@@ -92,9 +91,7 @@ class LogVisits
 
     public static function getIpMetadata($ip = '127.0.0.1')
     {
-
         if (config('log-visits.ip-metadata-service') == 'ipstack') {
-
             $geoIp = new IpStackGeoIp();
 
             return $geoIp->ip($ip)->getMetadata();
