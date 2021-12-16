@@ -55,6 +55,15 @@ return [
 
     /*
     |
+    | Use the native PHP get_browser function
+    | The browscap directive of the [browscap] section of your php.ini must be set
+    | Authorized values are: native and cache
+    |
+    */
+    'get-browser-source' => env('VISIT_BROWSER_SOURCE', 'cache'),
+
+    /*
+    |
     | Configure the cache store used by the package
     |
     */
@@ -155,6 +164,11 @@ $ipMetadata = LogVisits::getIpMetadata();
 
 // Gets IP metadata for specified IP address
 $ipMetadata = LogVisits::getIpMetadata('142.250.64.142');
+
+// Gets the country short code for the current request ip
+// Usefull for phone number of countries UI default
+// Will return the ip-metadata-default-country-code config if unable to process through ipstack
+$ipMetadata = LogVisits::getCountryCode();
 
 // Resolves the current IP
 // If server variable HTTP_FORWARDED_FOR or header x_real_ip is set, it will be used over REMOTE_ADDR variable

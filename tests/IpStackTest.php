@@ -17,3 +17,11 @@ it('can fetch ip metadata from ipstack', function () {
     $this->assertTrue(isset(collect(json_decode(PageVisit::first()->ip_metadata))->toArray()['ip']));
     $this->assertEquals('142.250.64.142', collect(json_decode(PageVisit::first()->ip_metadata))->toArray()['ip']);
 });
+
+it('can fetch country from ipstack', function () {
+    config(['log-visits.ip-metadata-service' => 'ipstack']);
+    config(['log-visits.ipstack.url' => 'https://api.ipstack.com']);
+    config(['log-visits.ipstack.key' => '']);
+
+    $this->assertEquals('us', LogVisits::getCountryCode());
+});
