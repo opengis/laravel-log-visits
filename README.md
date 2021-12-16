@@ -192,7 +192,7 @@ You can also update the browscap.ini cache from the most recent file with this a
 php artisan log-visits:update-browscap
 ```
 
-You can make sure that you get a fresh version every week by adding this to your App\Console\Kernel.php file:
+You can make sure that you get a fresh version from the browscap.ini file every week by adding this to your App\Console\Kernel.php file:
 
 ```php
 
