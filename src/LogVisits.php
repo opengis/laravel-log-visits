@@ -55,13 +55,13 @@ class LogVisits
                     try {
                         $metadata = collect(get_browser($user_agent))->toArray();
 
-                        if(!isset($metadata['browser'])){
+                        if (! isset($metadata['browser'])) {
                             $metadata['browser'] = 'Unknown';
                         }
-                        if(!isset($metadata['platform'])){
+                        if (! isset($metadata['platform'])) {
                             $metadata['platform'] = 'Unknown';
                         }
-                        if(!isset($metadata['user_agent'])){
+                        if (! isset($metadata['user_agent'])) {
                             $metadata['user_agent'] = $user_agent;
                         }
                     } catch (Throwable $th) {
