@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-log-visits` will be documented in this file.
 
+## 1.1.2 - 2021-12-17
+
+- Safer getBrowser function
+
+**Full Changelog**: https://github.com/opengis/laravel-log-visits/compare/1.1.1...1.1.2
+
 ## 1.1.1 - 2021-12-17
 
 - Safer return with get_browser()
