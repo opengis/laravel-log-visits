@@ -46,7 +46,7 @@ class LogVisits
     public static function getBrowser($user_agent = null)
     {
         if (config('log-visits.get-browser-source') == 'native') {
-            if (!$user_agent) {
+            if (! $user_agent) {
                 $user_agent = request()->server('HTTP_USER_AGENT');
             }
 
@@ -55,13 +55,13 @@ class LogVisits
                     try {
                         $metadata = collect(get_browser($user_agent))->toArray();
 
-                        if (!isset($metadata['browser'])) {
+                        if (! isset($metadata['browser'])) {
                             $metadata['browser'] = 'Unknown';
                         }
-                        if (!isset($metadata['platform'])) {
+                        if (! isset($metadata['platform'])) {
                             $metadata['platform'] = 'Unknown';
                         }
-                        if (!isset($metadata['user_agent'])) {
+                        if (! isset($metadata['user_agent'])) {
                             $metadata['user_agent'] = $user_agent;
                         }
                     } catch (Throwable $th) {
@@ -161,7 +161,7 @@ class LogVisits
 
     public static function getIp($server_vars = null)
     {
-        if (!$server_vars) {
+        if (! $server_vars) {
             $server_vars = self::getServerVars();
         }
 
