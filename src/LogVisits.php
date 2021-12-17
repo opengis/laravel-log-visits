@@ -54,6 +54,16 @@ class LogVisits
                 return Cache::store(config('log-visits.cache-store'))->remember($user_agent, now()->addDay(config('log-visits.ip-metadata-cache-days', 30)), function () use ($user_agent) {
                     try {
                         $metadata = collect(get_browser($user_agent))->toArray();
+
+                        if(!isset($metadata['browser'])){
+                            $metadata['browser'] = 'Unknown';
+                        }
+                        if(!isset($metadata['platform'])){
+                            $metadata['platform'] = 'Unknown';
+                        }
+                        if(!isset($metadata['user_agent'])){
+                            $metadata['user_agent'] = $user_agent;
+                        }
                     } catch (Throwable $th) {
                         $metadata = [
                             'browser' => 'Unknown',
